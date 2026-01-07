@@ -1,0 +1,53 @@
+meta {
+  name: Chat no stream
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8000/api/chat_no_stream
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hi"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello, how can I help you?"
+      },
+      {
+        "role": "user",
+        "content": "what rooms do you have?"
+      },
+      {
+        "role": "assistant",
+        "content": "We offer three types of rooms at the Grand Hotel:1. **President Room*2. **Superior Room*3. **Family Room**Each room type is designed to provide comfort and luxury to our guests. If you need more details about any specific room type, feel free to ask!"
+      },
+      {
+        "role": "user",
+        "content": "what the temperature in sixth month?"
+      }
+    ]
+  }
+}
+
+docs {
+  Message role moze biti:
+  
+  class MessageRole(str, Enum):
+  
+      SYSTEM = "system"
+      DEVELOPER = "developer"
+      USER = "user"
+      ASSISTANT = "assistant"
+      FUNCTION = "function"
+      TOOL = "tool"
+      CHATBOT = "chatbot"
+      MODEL = "model"
+}
