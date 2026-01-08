@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 qdrant_link = os.getenv("QDRANT_LINK")
-qdrant_api_key = os.getenv("QDRANT_API_KEY") 
+#qdrant_api_key = os.getenv("QDRANT_API_KEY")
 basic_info_vdb_collection_name = os.getenv("BASIC_INFO_VDB_COLLECTION") 
 
 class BasicInfoSpec(BaseToolSpec):
@@ -19,10 +19,7 @@ class BasicInfoSpec(BaseToolSpec):
         "A tool for getting basic information about hotel. It has information about the room, restaurant, spa and wellness zone, bussines clients, pets and more."
 
         client = qdrant_client.QdrantClient(
-            qdrant_link,
-            api_key=qdrant_api_key,
-            https=True,
-            port=None
+            qdrant_link
         )
 
         points = client.scroll(

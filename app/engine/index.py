@@ -4,6 +4,7 @@ from llama_index.llms.openai import OpenAI
 
 from dotenv import load_dotenv
 from app.engine.propmts import get_system_prompt
+from app.engine.tools.contact import ContactSpec
 
 from app.engine.tools.room_availability.booking_and_availability import BookingReservationAvailabilityToolSpec
 from app.engine.tools.weather.forecast import ForecastSpec
@@ -32,6 +33,7 @@ def get_agent(language: str):
     business_tool = BusinessSpec().to_tool_list()
     basic_info_tool = BasicInfoSpec().to_tool_list()
     fallback_tool = FallbackToHumanSpec().to_tool_list()
+    contact_tool = ContactSpec().to_tool_list()
 
     tools = (
         fallback_tool + 
@@ -42,13 +44,14 @@ def get_agent(language: str):
         directions_tool + 
         culture_tool + 
         offers_tool + 
-        business_tool
+        business_tool +
+        contact_tool
     )
 
     agent = FunctionAgent(
         tools=tools, 
         llm=openai_llm,
-        verbose=False,
+        verbose=True,
         system_prompt=get_system_prompt(language),
         max_function_calls=1
     )

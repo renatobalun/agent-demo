@@ -11,25 +11,22 @@ import qdrant_client
 from dotenv import load_dotenv
 
 load_dotenv()
-qdrant_api_key = os.getenv("QDRANT_API_KEY")
+#qdrant_api_key = os.getenv("QDRANT_API_KEY")
 qdrant_link = os.getenv("QDRANT_LINK")
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
 def generate_datasource():
-    documents = SimpleDirectoryReader("data/business").load_data()
+    documents = SimpleDirectoryReader("../../data/events").load_data()
     logger.info("Connecting to qdrant")
 
     client = qdrant_client.QdrantClient(
-        qdrant_link,
-        api_key=qdrant_api_key,
-        https=True,
-        port=None
+        qdrant_link
     )
     logger.info("Creating new index")
 
-    vector_store = QdrantVectorStore(client=client, collection_name="grand_hotel_business")
+    vector_store = QdrantVectorStore(client=client, collection_name="grand_hotel_events")
     logger.info("Created QdrantVectorStore")
 
     storage_context = StorageContext.from_defaults(vector_store=vector_store)

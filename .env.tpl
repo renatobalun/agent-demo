@@ -1,2 +1,6 @@
 MODEL=gpt-4o
 OPENAI_API_KEY=
+QDRANT_LINK=http://localhost:6333
+BASIC_INFO_VDB_COLLECTION=grand_hotel_basic_info
+BUSINESS_VDB_COLLECTION=grand_hotel_business
+EVENTS_VDB_COLLECTION=grand_hotel_events

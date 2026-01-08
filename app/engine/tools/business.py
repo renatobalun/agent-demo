@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 qdrant_link = os.getenv("QDRANT_LINK")
-qdrant_api_key = os.getenv("QDRANT_API_KEY") 
+#qdrant_api_key = os.getenv("QDRANT_API_KEY")
 business_vdb_collection_name = os.getenv("BUSINESS_VDB_COLLECTION") 
 
 class BusinessSpec(BaseToolSpec):
@@ -19,10 +19,7 @@ class BusinessSpec(BaseToolSpec):
         "A tool for getting information about business clients, conferences, team buildings."
 
         client = qdrant_client.QdrantClient(
-            qdrant_link,
-            api_key=qdrant_api_key,
-            https=True,
-            port=None
+            qdrant_link
         )
 
         points = client.scroll(
